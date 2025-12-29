@@ -89,7 +89,9 @@ These are the **actual** challenges encountered in this project:
 ## 📬 Contact
 
 👤 **Name:** Bharath R
+
 📩 **Email:** bharathrgowda008@gmail.com  
+
 🔗 LinkedIn: *[linkedin.com/in/bharath-r-354535212](https://www.linkedin.com/in/bharath-r-354535212?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B8zFuyCyrSyGfOhTRtNzIJw%3D%3D)*  
 
 ---
