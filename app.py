@@ -1,10 +1,9 @@
 import streamlit as st
 import pickle
 import re
+import os
 import nltk
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import TfidfVectorizer
-import os
 
 # -------------------------------
 # Load stopwords (cached)
@@ -19,10 +18,10 @@ def load_stopwords():
 # -------------------------------
 @st.cache_resource
 def load_model_and_vectorizer():
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-    model_path = os.path.join(BASE_DIR, "notebooks", "model.pkl")
-    vectorizer_path = os.path.join(BASE_DIR, "notebooks", "vectorizer.pkl")
+    model_path = os.path.join(BASE_DIR, "model.pkl")
+    vectorizer_path = os.path.join(BASE_DIR, "vectorizer.pkl")
 
     with open(model_path, "rb") as model_file:
         model = pickle.load(model_file)
@@ -36,12 +35,14 @@ def load_model_and_vectorizer():
 # Sentiment prediction function
 # -------------------------------
 def predict_sentiment(text, model, vectorizer, stop_words):
+    # Clean text
     text = re.sub('[^a-zA-Z]', ' ', text)
     text = text.lower()
     text = text.split()
     text = [word for word in text if word not in stop_words]
     text = ' '.join(text)
 
+    # Transform and predict
     transformed_text = vectorizer.transform([text])
     prediction = model.predict(transformed_text)[0]
 
@@ -52,7 +53,6 @@ def predict_sentiment(text, model, vectorizer, stop_words):
 # -------------------------------
 def main():
     st.set_page_config(page_title="Sentiment Analysis App", layout="centered")
-
     st.title("🧠 Sentiment Analysis App")
     st.write("Analyze sentiment of any text using a trained ML model.")
 
